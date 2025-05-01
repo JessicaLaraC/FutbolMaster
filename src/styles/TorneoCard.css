@@ -1,0 +1,73 @@
+    .torneo-card {
+        padding: 1rem;
+        border-radius: 15px;
+        color: #1b1a1a;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        position: relative;
+        min-height: 160px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s ease;
+    }
+    
+    .torneo-card:hover {
+        transform: scale(1.02);
+    }
+    
+    .torneo-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .torneo-nombre {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+    
+    .torneo-acciones {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .edit-icon,
+    .delete-icon {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        color: white;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+    
+    .edit-icon:hover,
+    .delete-icon:hover {
+        transform: scale(1.2);
+    }
+    
+    .torneo-fechas p {
+        margin: 0.25rem 0;
+        font-size: 0.95rem;
+    }
+    
+    .torneo-estado {
+        margin-top: 0.5rem;
+        padding: 0.3rem 0.6rem;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 0.85rem;
+        text-align: center;
+        width: fit-content;
+        align-self: center;
+        background: rgba(0, 0, 0, 0.2);
+    }
+    
+    .finalizado {
+        background-color: #e74c3c;
+    }
+    
+    .en-curso {
+        background-color: #2ecc71;
+    }
+    

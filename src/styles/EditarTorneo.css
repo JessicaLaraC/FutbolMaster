@@ -1,0 +1,73 @@
+    .editar-torneo-form {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background: #e8f5e9;
+        border-radius: 12px;
+        box-shadow: 0 0 10px #a5d6a7;
+    }
+    
+    .editar-torneo-form h2 {
+        text-align: center;
+        color: #2e7d32;
+    }
+    
+    label {
+        display: block;
+        margin-top: 12px;
+        color: #1b5e20;
+    }
+    
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #c8e6c9;
+        border-radius: 8px;
+        font-size: 1em;
+    }
+    
+    .equipo-box {
+        background: #f1f8e9;
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 10px;
+        border: 1px solid #aed581;
+    }
+    
+    .jugador-box {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    
+    button {
+        margin-top: 10px;
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    
+    button[type="button"] {
+        background-color: #81c784;
+        color: white;
+    }
+    
+    .acciones {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    
+    button.guardar {
+        background-color: #388e3c;
+        color: white;
+    }
+    
+    button.cancelar {
+        background-color: #d32f2f;
+        color: white;
+    }
+    

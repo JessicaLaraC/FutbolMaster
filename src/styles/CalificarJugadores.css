@@ -1,0 +1,110 @@
+.calificar-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    font-family: sans-serif;
+    background-color: #f7f7f7;
+    border-radius: 15px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    }
+    
+    h2 {
+        margin-top: 20px;
+    }
+    
+    .nombre-jugador {
+        font-weight: bold;
+        font-size: 18px;
+    }
+    
+    .equipo-jugador {
+        color: #666;
+        margin-bottom: 10px;
+    }
+    
+    .emoji {
+        font-size: 50px;
+        margin: 15px 0;
+    }
+    
+    .texto-calificacion {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+    
+    .estrellas-horizontal {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 10px 0;
+    }
+    
+    .estrellas-horizontal .estrella {
+        font-size: 30px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        color: #ccc;
+        transition: transform 0.2s;
+    }
+    
+    .estrellas-horizontal .estrella.activa {
+        color: gold;
+    }
+    
+    .btn-enviar {
+        margin-top: 15px;
+        background-color: #6fdd6f;
+        color: white;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 12px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    .btn-enviar:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+    
+    .btn-salir {
+        margin-top: 10px;
+        background: none;
+        color: red;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+    }
+    .historial-calificaciones {
+        margin-top: 20px;
+        text-align: left;
+        background-color: #ffffff;
+        padding: 10px 15px;
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    }
+    
+    .historial-calificaciones h4 {
+        margin-bottom: 10px;
+        font-size: 16px;
+        color: #444;
+    }
+    
+    .historial-calificaciones ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    
+    .historial-calificaciones li {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+    
+    .historial-calificaciones .fecha {
+        color: #666;
+        font-size: 13px;
+    }
+    

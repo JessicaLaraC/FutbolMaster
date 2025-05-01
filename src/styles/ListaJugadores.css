@@ -1,0 +1,83 @@
+.lista-jugadores-app {
+  padding: 10px;
+  font-family: sans-serif;
+}
+
+.tablero-verde {
+  background-color: #e4f9e4;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tablero-verde .equipos {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.tablero-verde .marcador {
+  background-color: #c7eac7;
+  padding: 5px 15px;
+  border-radius: 12px;
+  font-size: 24px;
+}
+
+.tablero-verde .tiempo,
+.torneo-nombre,
+.num-jugadores {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.jugadores-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.jugador-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d8f5d8;
+  border-radius: 10px;
+  padding: 12px 18px;
+  gap: 20px; 
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.jugador-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1; 
+}
+
+
+.jugador-icono {
+  font-size: 22px;
+}
+
+.jugador-nombre {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.btn-calificar {
+  background-color: #6fdd6f;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-calificar:hover {
+  background-color: #5ec25e;
+}

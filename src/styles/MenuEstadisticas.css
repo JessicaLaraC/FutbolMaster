@@ -1,0 +1,76 @@
+.menu-estadisticas-container {
+    padding: 1rem;
+    background: #f0f0f0;
+    border-radius: 12px;
+    max-width: 480px;
+    margin: auto;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+  }
+  
+  .tabs button {
+    flex: 1;
+    padding: 10px;
+    background: #444;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .tabs button.active {
+    background: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+  }
+  
+  .estadisticas-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0.5rem;
+  }
+  
+  .btn-editar {
+    background: white;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  .eventos {
+    background: #474747;
+    color: white;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  
+  .evento {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #333;
+  }
+  
+  .minuto {
+    color: #ccc;
+  }
+  
+  .tipo {
+    font-weight: bold;
+  }
+  
+  .jugador {
+    color: #4fd1c5;
+  }
+  
+  .asistido {
+    font-size: 0.8rem;
+    color: #a3e635;
+  }
+  

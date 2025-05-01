@@ -1,0 +1,108 @@
+    .lista-jugadores-app {
+        padding: 1rem;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+    
+    .tablero-verde {
+        background-color: #e7fbe7;
+        border: 1px solid #0a0;
+        border-radius: 10px;
+        padding: 1rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .tablero-verde .equipos {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+    
+    .tablero-verde .marcador {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #0a0;
+    }
+    
+    .tablero-verde .tiempo,
+    .tablero-verde .torneo-nombre {
+        font-size: 0.9rem;
+        margin: 0.2rem 0;
+    }
+    
+    .alineacion {
+        text-align: center;
+    }
+    
+    .alineacion h2 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .alineacion-campo {
+        position: relative;
+        width: 280px;
+        height: 480px;
+        margin: 1rem auto;
+        background: #f9f9f9;
+        border: 2px solid #0a0;
+        border-radius: 12px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .alineacion-jugador {
+        position: absolute;
+        width: 45px;
+        height: 45px;
+        background: #111;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 11px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+    }
+    
+    .alineacion-numero {
+        font-weight: bold;
+    }
+    
+    .alineacion-nombre {
+        font-size: 9px;
+    }
+    
+    .alineacion-borrar {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background: red;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 10px;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+    
+    .alineacion-acciones {
+        margin-top: 1rem;
+    }
+    
+    .alineacion-btn-editar {
+        padding: 6px 14px;
+        background-color: #04b404;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+  

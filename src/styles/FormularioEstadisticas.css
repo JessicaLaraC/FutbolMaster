@@ -1,0 +1,63 @@
+    .form-estadisticas {
+        padding: 20px;
+        background: #f3fef3;
+        border-radius: 15px;
+        max-width: 400px;
+        margin: auto;
+    }
+    
+    h2 {
+        text-align: center;
+        color: #2a6b2a;
+    }
+    
+    .form-campos {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    input, select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1em;
+    }
+    
+    .lista-eventos {
+        margin-top: 20px;
+        background-color: #e0fbe0;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    
+    .evento-item {
+        padding: 5px 0;
+        border-bottom: 1px solid #c0dec0;
+    }
+    
+    .btn {
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    .btn.verde {
+        background-color: #4caf50;
+        color: white;
+    }
+    
+    .btn.cancelar {
+        background-color: #e53935;
+        color: white;
+        margin-top: 10px;
+    }
+    
+    .botones-accion {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    

@@ -1,0 +1,48 @@
+.form-partidos-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background-color: #f44336;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.error {
+    color: #f44336;
+    text-align: center;
+}
+
+.loading {
+    color: #4CAF50;
+    text-align: center;
+}

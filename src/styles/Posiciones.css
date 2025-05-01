@@ -1,0 +1,76 @@
+    .tablero.verde {
+        background-color: #e4f9e4;
+        border-radius: 15px;
+        padding: 10px;
+        margin: 10px 0;
+        text-align: center;
+    }
+    
+    .tablero .equipos {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    
+    .tablero .marcador {
+        font-size: 28px;
+        background-color: #c7eac7;
+        padding: 5px 15px;
+        border-radius: 12px;
+        margin: 0 10px;
+    }
+    
+    .tablero .tiempo {
+        font-size: 14px;
+        margin-top: 8px;
+        color: #333;
+    }
+    
+    .tabla-posiciones {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+    
+    .tabla-posiciones th, .tabla-posiciones td {
+        padding: 8px;
+        border: 1px solid #b6ddb6;
+        text-align: center;
+    }
+    
+    .tabla-posiciones th {
+        background-color: #cdeecd;
+        font-weight: bold;
+    }
+    
+    .tabla-posiciones tr:nth-child(even) {
+        background-color: #f5fff5;
+    }
+    
+    .tabla-posiciones tr:nth-child(odd) {
+        background-color: #eafae8;
+    }
+    
+    .torneo-header {
+        text-align: center;
+        margin: 20px 0;
+    }
+    
+    .torneo-nombre {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    
+    .estado-torneo .activo {
+        color: green;
+        font-weight: bold;
+    }
+    
+    .estado-torneo .inactivo {
+        color: red;
+        font-weight: bold;
+    }
+    
