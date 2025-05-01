@@ -4,7 +4,6 @@ import { doc, getDoc, setDoc, collection, getDocs } from "firebase/firestore";
 import { db, auth } from "./firebase";
 import "../styles/FormularioAlineacion.css";
 
-// Función para obtener el nombre correctamente
 function obtenerNombre(data, opciones, defecto = "Sin nombre") {
     for (let key of opciones) {
         if (data[key]) return data[key];
@@ -29,7 +28,6 @@ const FormularioAlineacion = () => {
         const userId = auth.currentUser?.uid;
         if (!userId) return;
 
-        // Obtener jugadores del equipo
         const jugadoresRef = collection(db, `Users/${userId}/Torneos/${torneoId}/Equipos/${equipoId}/Jugadores`);
         const jugadoresSnap = await getDocs(jugadoresRef);
         const listaJugadores = jugadoresSnap.docs.map(doc => ({
@@ -38,14 +36,12 @@ const FormularioAlineacion = () => {
         }));
         setJugadores(listaJugadores);
 
-        // Obtener nombre del equipo
         const equipoRef = doc(db, `Users/${userId}/Torneos/${torneoId}/Equipos/${equipoId}`);
         const equipoSnap = await getDoc(equipoRef);
         if (equipoSnap.exists()) {
             setEquipoNombre(obtenerNombre(equipoSnap.data(), ["nombre", "nombre_equipo"]));
         }
 
-        // Cargar alineación si ya existía
         const alineacionRef = doc(db, `Users/${userId}/Torneos/${torneoId}/Equipos/${equipoId}/Alineacion/${posicionId}`);
         const alineacionSnap = await getDoc(alineacionRef);
         if (alineacionSnap.exists()) {
@@ -78,7 +74,7 @@ const FormularioAlineacion = () => {
     };
 
     const cancelar = () => {
-        navigate(-1); // volver a la página anterior
+        navigate(-1); 
     };
 
     return (

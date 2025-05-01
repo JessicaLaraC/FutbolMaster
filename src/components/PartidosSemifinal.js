@@ -44,13 +44,11 @@ const PartidosSemifinal = () => {
         const snapshot = await getDocs(partidosRef);
         let partidosList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-        // Si ya hay 4 partidos, solo mostramos
         if (partidosList.length >= 4) {
         setPartidos(partidosList.slice(0, 4));
         return;
         }
 
-        // Obtener equipos
         const equiposRef = collection(db, `Users/${user.uid}/Torneos/${torneoId}/Equipos`);
         const equiposSnap = await getDocs(equiposRef);
         const equiposList = equiposSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -90,7 +88,6 @@ const PartidosSemifinal = () => {
 
         await Promise.all(nuevasPromesas);
 
-        // Volver a obtener todos los partidos
         const nuevosSnapshot = await getDocs(partidosRef);
         const todos = nuevosSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setPartidos(todos.slice(0, 4));

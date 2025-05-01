@@ -35,7 +35,7 @@ const FormPartido = () => {
                 return {
                     id: doc.id,
                     nombre: data.nombre || data.nombre_equipo || "Equipo sin nombre",
-                    ...data, // incluye otros campos (si los hubiera)
+                    ...data, 
                 };
             });
             setEquipos(equiposData);

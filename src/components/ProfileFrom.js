@@ -24,12 +24,10 @@ function FormProfile() {
         if (user) {
         const updates = {};
 
-        // Si se ingresó un nuevo nombre
         if (formData.firstName.trim()) {
             updates.firstName = formData.firstName.trim();
         }
 
-        // Si se ingresó un nuevo correo
         if (formData.email.trim() && formData.email !== user.email) {
             try {
             await updateEmail(user, formData.email.trim());
@@ -40,7 +38,6 @@ function FormProfile() {
             }
         }
 
-        // Si se ingresó una nueva contraseña
         if (formData.password.trim()) {
             try {
             await updatePassword(user, formData.password.trim());
@@ -50,7 +47,6 @@ function FormProfile() {
             }
         }
 
-        // Si hay campos que actualizar en Firestore
         if (Object.keys(updates).length > 0) {
             const userRef = doc(db, "Users", user.uid);
             await updateDoc(userRef, updates);

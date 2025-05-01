@@ -56,7 +56,7 @@ const Partidos = () => {
 
       if (torneoSnap.exists()) {
         const data = torneoSnap.data();
-        setCreadorTorneoId(data.creadorId || user.uid); // fallback por compatibilidad
+        setCreadorTorneoId(data.creadorId || user.uid); 
       } else {
         console.warn("No se encontró el torneo");
       }

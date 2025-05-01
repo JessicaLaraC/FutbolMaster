@@ -16,7 +16,7 @@ function Login() {
       await signInWithEmailAndPassword(auth, email, password);
       console.log("Inicio de sesión exitoso");
 
-      // Redirige al usuario a la página de torneos
+
       navigate("/panelTorneo");
       toast.success("Inicio de sesión exitoso", {
         position: "top-center",

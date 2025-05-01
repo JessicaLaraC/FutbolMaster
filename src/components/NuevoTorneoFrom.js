@@ -40,7 +40,6 @@ const NuevoTorneoForm = () => {
             }
         }
 
-        // Mezclar aleatoriamente los partidos
         for (let i = partidos.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [partidos[i], partidos[j]] = [partidos[j], partidos[i]];
@@ -66,7 +65,7 @@ const NuevoTorneoForm = () => {
                 fecha_fin: Timestamp.fromDate(new Date(fechaFin)),
                 numero_equipos: numeroEquipos,
                 estado: "En curso",
-                creadorId: userId // ✅ Se guarda el UID del usuario como creador del torneo
+                creadorId: userId 
             });
 
             const nombresEquipos = [];

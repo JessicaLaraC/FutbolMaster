@@ -22,7 +22,7 @@ const TorneoCard = ({
                 <button
                     className="edit-icon"
                     onClick={(e) => {
-                    e.stopPropagation(); // evita que se dispare el click general de la tarjeta
+                    e.stopPropagation(); 
                     onEdit(id);
                     }}
                     title="Editar torneo"

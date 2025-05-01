@@ -147,7 +147,6 @@ const posiciones1 = [
                 );
             })}
 
-            {/* Alineación equipo 2 */}
             {posiciones2.map((pos) => {
                 const jugador = alineacion2[pos.id] || {};
                 return (

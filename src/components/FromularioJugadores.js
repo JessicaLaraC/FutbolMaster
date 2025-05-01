@@ -48,7 +48,7 @@ const FormularioJugadores = () => {
         setNumeroJugador("");
         setEquipoSeleccionado("");
         alert("Jugador guardado correctamente");
-        navigate(-1); // volver a pantalla anterior
+        navigate(-1); 
     };
 
     return (

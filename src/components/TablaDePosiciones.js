@@ -26,7 +26,6 @@ function TablaDePosiciones() {
 
             const userId = user.uid;
 
-            // Obtener torneo
             const torneoRef = doc(db, `Users/${userId}/Torneos/${torneoId}`);
             const torneoSnap = await getDoc(torneoRef);
             if (!torneoSnap.exists()) throw new Error("Torneo no encontrado");
@@ -34,7 +33,6 @@ function TablaDePosiciones() {
             const torneoData = torneoSnap.data();
             setTorneo(torneoData);
 
-            // Obtener equipos
             const equiposRef = collection(db, `Users/${userId}/Torneos/${torneoId}/Equipos`);
             const equiposSnap = await getDocs(equiposRef);
             if (equiposSnap.empty) throw new Error("No hay equipos registrados");
@@ -52,7 +50,6 @@ function TablaDePosiciones() {
             });
             });
 
-            // Obtener partidos
             const partidosRef = collection(db, `Users/${userId}/Torneos/${torneoId}/Partidos`);
             const partidosSnap = await getDocs(partidosRef);
 
@@ -64,11 +61,9 @@ function TablaDePosiciones() {
             const eq2 = equiposMap.get(equipo2?.id);
 
             if (eq1 && eq2 && golesEquipo1 != null && golesEquipo2 != null) {
-                // Actualizar estadísticas equipo1
                 eq1.jugados++;
                 eq1.diferenciaGoles += golesEquipo1 - golesEquipo2;
 
-                // Actualizar estadísticas equipo2
                 eq2.jugados++;
                 eq2.diferenciaGoles += golesEquipo2 - golesEquipo1;
 

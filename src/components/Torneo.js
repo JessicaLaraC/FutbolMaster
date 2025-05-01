@@ -24,14 +24,12 @@ function Torneo() {
                     return;
                 }
 
-                // 🔹 Referencia al torneo específico dentro del usuario
                 const torneoRef = doc(db, "Users", user.uid, "Torneos", id);
                 const torneoSnap = await getDoc(torneoRef);
 
                 if (torneoSnap.exists()) {
                     setTorneo(torneoSnap.data());
 
-                    // 🔹 Contar los equipos dentro del torneo
                     const equiposRef = collection(db, "Users", user.uid, "Torneos", id, "Equipos");
                     const equiposSnap = await getDocs(equiposRef);
 

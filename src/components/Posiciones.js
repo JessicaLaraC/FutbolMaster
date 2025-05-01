@@ -5,7 +5,6 @@ import { db, auth } from "./firebase";
 import MenuEstadisticas from "./MenuEstadisticas";
 import "../styles/Estadisticas.css";
 
-// Función reutilizable para obtener nombres desde distintos campos
 function obtenerNombre(data, opciones = ["nombre", "nombre_equipo", "nombre_torneo"], defecto = "Sin nombre") {
     for (let key of opciones) {
         if (data?.[key]) return data[key];

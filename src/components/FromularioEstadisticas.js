@@ -60,7 +60,7 @@ const FormularioEstadisticas = () => {
         const equipoId = e.target.value;
         setEquipoSeleccionado(equipoId);
         setJugadoresVisibles(jugadoresPorEquipo[equipoId] || []);
-        setNuevoEvento({ ...nuevoEvento, jugador: "" }); // Reset jugador al cambiar equipo
+        setNuevoEvento({ ...nuevoEvento, jugador: "" }); 
     };
 
     const agregarEvento = () => {

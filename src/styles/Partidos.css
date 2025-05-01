@@ -25,14 +25,12 @@ h2 {
   font-size: 1rem;
 }
 
-/* Estilo de la lista de partidos */
 .partidos-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-/* Estilo de tarjeta */
 .partido-card {
   background: #f0f0f0;
   border-radius: 16px;
@@ -46,7 +44,6 @@ h2 {
   transform: scale(1.01);
 }
 
-/* Nombre del partido */
 .partido-nombre {
   font-weight: bold;
   font-size: 1rem;
@@ -61,7 +58,6 @@ h2 {
   cursor: pointer;
 }
 
-/* Marcador visual */
 .marcador {
   display: flex;
   justify-content: space-around;
@@ -88,14 +84,12 @@ h2 {
   align-items: center;
 }
 
-/* Ubicación */
 .ubicacion {
   font-size: 0.9rem;
   text-align: center;
   color: #555;
 }
 
-/* Botones de arriba */
 .partidos-actions {
   display: flex;
   justify-content: space-between;
