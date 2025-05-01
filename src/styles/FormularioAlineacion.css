@@ -1,0 +1,84 @@
+.formulario-alineacion {
+        max-width: 500px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: #e8f5e9;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 100, 0, 0.2);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #1b5e20;
+    }
+    
+    .formulario-alineacion h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+        color: #2e7d32;
+    }
+    
+    .formulario-alineacion p {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-weight: bold;
+    }
+    
+    form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #2e7d32;
+    }
+    
+    form select {
+        width: 100%;
+        padding: 0.6rem;
+        margin-bottom: 1.2rem;
+        border: 2px solid #a5d6a7;
+        border-radius: 10px;
+        background-color: #ffffff;
+        color: #1b5e20;
+        font-size: 1rem;
+    }
+    
+    form select:focus {
+        outline: none;
+        border-color: #66bb6a;
+        box-shadow: 0 0 5px #81c784;
+    }
+    
+    .alineacion-botones {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+    }
+    
+    .alineacion-botones button {
+        flex: 1;
+        padding: 0.7rem;
+        margin: 0 0.5rem;
+        background-color: #388e3c;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .alineacion-botones button:hover {
+        background-color: #2e7d32;
+    }
+    
+    @media (max-width: 600px) {
+        .formulario-alineacion {
+        padding: 1.5rem;
+        }
+    
+        .alineacion-botones {
+        flex-direction: column;
+        }
+    
+        .alineacion-botones button {
+        margin: 0.5rem 0;
+        }
+    }
+    
