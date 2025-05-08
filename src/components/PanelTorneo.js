@@ -12,7 +12,7 @@ const PanelTorneo = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm] = useState("");
     const [userId, setUserId] = useState(null);
-    const torneosPerPage = 5;
+    const torneosPerPage = 10;
     const navigate = useNavigate();
 
     useEffect(() => {
