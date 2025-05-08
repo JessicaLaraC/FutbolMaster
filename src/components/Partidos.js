@@ -1,6 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { collection, getDocs, doc, deleteDoc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  deleteDoc,
+  addDoc,
+  doc,
+  getDoc
+} from "firebase/firestore";
 import { db, auth } from "./firebase";
 import "../styles/Partidos.css";
 
@@ -11,102 +18,126 @@ const Partidos = () => {
   const [equipos, setEquipos] = useState([]);
   const [partidos, setPartidos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [operando, setOperando] = useState(false);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+
   const [userId, setUserId] = useState(null);
   const [creadorTorneoId, setCreadorTorneoId] = useState(null);
 
-  const obtenerEquipos = useCallback(async () => {
-    try {
-      const user = auth.currentUser;
-      if (!user) return navigate("/login");
+  const obtenerCreador = useCallback(async () => {
+    const user = auth.currentUser;
+    if (!user) return navigate("/login");
+    setUserId(user.uid);
 
-      const equiposRef = collection(db, `Users/${user.uid}/Torneos/${torneoId}/Equipos`);
-      const snapshot = await getDocs(equiposRef);
-      const equiposList = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setEquipos(equiposList);
-    } catch (err) {
-      console.error("Error obteniendo equipos:", err);
-      setError("Error al cargar los equipos");
-    }
+    const torneoRef = doc(db, `Users/${user.uid}/Torneos/${torneoId}`);
+    const snap = await getDoc(torneoRef);
+    setCreadorTorneoId(
+      snap.exists() ? (snap.data().creadorId || user.uid) : user.uid
+    );
+  }, [torneoId, navigate]);
+
+  const obtenerEquipos = useCallback(async () => {
+    const user = auth.currentUser;
+    if (!user) return navigate("/login");
+
+    const ref = collection(
+      db,
+      `Users/${user.uid}/Torneos/${torneoId}/Equipos`
+    );
+    const snap = await getDocs(ref);
+    const lista = snap.docs.map((d) => {
+      const data = d.data();
+      return {
+        id: d.id,
+        nombre:
+          data.nombre ||
+          data.nombre_equipo ||
+          data.nombre_jugador ||
+          "Equipo sin nombre",
+        ...data,
+      };
+    });
+    setEquipos(lista);
   }, [torneoId, navigate]);
 
   const obtenerPartidos = useCallback(async () => {
-    try {
-      const user = auth.currentUser;
-      if (!user) return navigate("/login");
+    const user = auth.currentUser;
+    if (!user) return navigate("/login");
 
-      const partidosRef = collection(db, `Users/${user.uid}/Torneos/${torneoId}/Partidos`);
-      const snapshot = await getDocs(partidosRef);
-      const partidosList = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setPartidos(partidosList);
-    } catch (err) {
-      console.error("Error obteniendo partidos:", err);
-      setError("Error al cargar los partidos");
-    }
-  }, [torneoId, navigate]);
-
-  const obtenerCreadorTorneo = useCallback(async () => {
-    try {
-      const user = auth.currentUser;
-      if (!user) return navigate("/login");
-
-      const torneoRef = doc(db, `Users/${user.uid}/Torneos/${torneoId}`);
-      const torneoSnap = await getDoc(torneoRef);
-
-      if (torneoSnap.exists()) {
-        const data = torneoSnap.data();
-        setCreadorTorneoId(data.creadorId || user.uid); 
-      } else {
-        console.warn("No se encontró el torneo");
-      }
-    } catch (err) {
-      console.error("Error obteniendo el creador del torneo", err);
-    }
+    const ref = collection(
+      db,
+      `Users/${user.uid}/Torneos/${torneoId}/Partidos`
+    );
+    const snap = await getDocs(ref);
+    setPartidos(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
   }, [torneoId, navigate]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const user = auth.currentUser;
-      if (!user) return navigate("/login");
-
-      setUserId(user.uid);
+    (async () => {
       try {
-        await obtenerCreadorTorneo();
-        await obtenerEquipos();
-        await obtenerPartidos();
+        setLoading(true);
+        const user = auth.currentUser;
+        if (!user) return navigate("/login");
+        await Promise.all([
+          obtenerCreador(),
+          obtenerEquipos(),
+          obtenerPartidos(),
+        ]);
       } catch (err) {
-        setError("Error al cargar los datos");
+        console.error(err);
+        setError("Error cargando datos");
       } finally {
         setLoading(false);
       }
-    };
+    })();
+  }, [obtenerCreador, obtenerEquipos, obtenerPartidos, navigate]);
 
-    fetchData();
-  }, [obtenerCreadorTorneo, obtenerEquipos, obtenerPartidos, navigate]);
-
-  const generarPartidosAleatorios = () => {
+  const generarTodosContraTodos = async () => {
     if (equipos.length < 2) {
-      alert("Necesitas al menos 2 equipos para generar partidos");
-      return;
+      return alert("Necesitas al menos 2 equipos");
     }
+    setOperando(true);
+    try {
+      const user = auth.currentUser;
+      if (!user) return navigate("/login");
 
-    const nuevosPartidos = [];
-    for (let i = 0; i < equipos.length; i++) {
-      for (let j = i + 1; j < equipos.length; j++) {
-        nuevosPartidos.push({
-          equipo1: { id: equipos[i].id, nombre: equipos[i].nombre },
-          equipo2: { id: equipos[j].id, nombre: equipos[j].nombre },
-          golesEquipo1: 0,
-          golesEquipo2: 0,
-          ubicacion: "Por definir",
-          fecha: new Date().toISOString().split("T")[0],
-          estado: "pendiente"
-        });
+      const basePath = `Users/${user.uid}/Torneos/${torneoId}/Partidos`;
+      const partidoCol = collection(db, basePath);
+
+      const existentesSnap = await getDocs(partidoCol);
+      for (const docSnap of existentesSnap.docs) {
+        await deleteDoc(doc(db, basePath, docSnap.id));
       }
-    }
 
-    setPartidos(nuevosPartidos);
+      const nuevos = [];
+      for (let i = 0; i < equipos.length; i++) {
+        for (let j = i + 1; j < equipos.length; j++) {
+          nuevos.push({
+            equipo1: { id: equipos[i].id, nombre: equipos[i].nombre },
+            equipo2: { id: equipos[j].id, nombre: equipos[j].nombre },
+            golesEquipo1: 0,
+            golesEquipo2: 0,
+            ubicacion: "Por definir",
+            fecha: new Date().toISOString().split("T")[0],
+            estado: "pendiente",
+          });
+        }
+      }
+
+      const creados = [];
+      for (const partido of nuevos) {
+        const ref = await addDoc(partidoCol, partido);
+        creados.push({ id: ref.id, ...partido });
+      }
+
+      setPartidos(creados);
+    } catch (err) {
+      console.error("Error generando partidos:", err);
+      setError("No se pudieron generar los partidos");
+    } finally {
+      setOperando(false);
+    }
   };
 
   const eliminarPartido = async (partidoId) => {
@@ -114,7 +145,13 @@ const Partidos = () => {
       const user = auth.currentUser;
       if (!user) return navigate("/login");
 
-      await deleteDoc(doc(db, `Users/${user.uid}/Torneos/${torneoId}/Partidos`, partidoId));
+      await deleteDoc(
+        doc(
+          db,
+          `Users/${user.uid}/Torneos/${torneoId}/Partidos`,
+          partidoId
+        )
+      );
       setPartidos(partidos.filter((p) => p.id !== partidoId));
     } catch (err) {
       console.error("Error eliminando partido:", err);
@@ -122,30 +159,35 @@ const Partidos = () => {
     }
   };
 
-  const navegarAFormulario = (partido = null) => {
-    if (partido) {
-      navigate(`/torneos/${torneoId}/partidos/editar/${partido.id}`, {
-        state: { partido }
-      });
-    } else {
-      navigate(`/torneos/${torneoId}/partidos/nuevo`);
-    }
+  const navegarAFormulario = () => {
+    navigate(`/torneos/${torneoId}/partidos/nuevo`);
+  };
+
+  const editarPartido = (partido) => {
+    navigate(`/torneos/${torneoId}/partidos/editar/${partido.id}`, {
+      state: { partido },
+    });
   };
 
   const navegarAEstadisticas = (partidoId) => {
-    navigate(`/torneos/${torneoId}/partidos/${partidoId}/estadisticas`);
+    navigate(
+      `/torneos/${torneoId}/partidos/${partidoId}/estadisticas`
+    );
   };
 
-  if (loading) return <div className="loading">Cargando partidos...</div>;
+  if (loading) return <div className="loading">Cargando...</div>;
   if (error) return <div className="error">{error}</div>;
 
-  const partidosFiltrados = partidos.filter((partido) =>
-    `${partido.equipo1?.nombre} ${partido.equipo2?.nombre}`.toLowerCase().includes(searchTerm.toLowerCase())
+  const partidosFiltrados = partidos.filter(({ equipo1, equipo2 }) =>
+    `${equipo1.nombre} vs ${equipo2.nombre}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
   );
 
   return (
     <div className="partidos-container">
       <h2>Partidos</h2>
+
       <div className="search-bar">
         <input
           type="text"
@@ -156,40 +198,71 @@ const Partidos = () => {
       </div>
 
       <div className="partidos-actions">
-        <button className="btn-generar" onClick={generarPartidosAleatorios} disabled={equipos.length < 2}>
-          Generar Partidos Aleatorios
+        <button
+          className="btn-generar"
+          onClick={generarTodosContraTodos}
+          disabled={
+            operando ||
+            equipos.length < 2 ||
+            userId !== creadorTorneoId
+          }
+          title={
+            userId !== creadorTorneoId
+              ? "Solo el creador puede generar el fixture"
+              : undefined
+          }
+        >
+          {operando ? "Generando..." : "Generar Partidos"}
         </button>
-        <button className="btn-crear" onClick={() => navegarAFormulario()}>
-          Crear Partido Manualmente
+
+        <button className="btn-crear" onClick={navegarAFormulario}>
+          Agregar Partido Manualmente
         </button>
       </div>
 
       <div className="partidos-list">
         {partidosFiltrados.length > 0 ? (
           partidosFiltrados.map((partido) => (
-            <div key={partido.id} className="partido-card" onClick={() => navegarAEstadisticas(partido.id)}>
+            <div
+              key={partido.id}
+              className="partido-card"
+              onClick={() => navegarAEstadisticas(partido.id)}
+            >
               <div className="partido-nombre">
                 <div>
-                  {partido.equipo1?.nombre || "Equipo 1"} VS {partido.equipo2?.nombre || "Equipo 2"}
+                  {partido.equipo1.nombre} VS {partido.equipo2.nombre}
                 </div>
-
                 <div className="icon-actions">
                   <span
-                    className={`edit-icon ${userId !== creadorTorneoId ? "disabled" : ""}`}
-                    title={userId !== creadorTorneoId ? "Solo el creador del torneo puede editar" : "Editar"}
+                    className={`edit-icon ${
+                      userId !== creadorTorneoId ? "disabled" : ""
+                    }`}
+                    title={
+                      userId !== creadorTorneoId
+                        ? "Solo el creador puede editar"
+                        : "Editar partido"
+                    }
                     onClick={(e) => {
                       e.stopPropagation();
-                      if (userId === creadorTorneoId) navegarAFormulario(partido);
+                      if (userId === creadorTorneoId)
+                        editarPartido(partido);
                     }}
                   >
                     ✏️
                   </span>
                   <span
-                    className={`delete-icon ${userId !== creadorTorneoId ? "disabled" : ""}`}
-                    title={userId !== creadorTorneoId ? "Solo el creador del torneo puede eliminar" : "Eliminar"}
+                    className={`delete-icon ${
+                      userId !== creadorTorneoId ? "disabled" : ""
+                    }`}
+                    title={
+                      userId !== creadorTorneoId
+                        ? "Solo el creador puede eliminar"
+                        : "Eliminar partido"
+                    }
                     onClick={(e) => {
                       e.stopPropagation();
-                      if (userId === creadorTorneoId) eliminarPartido(partido.id);
+                      if (userId === creadorTorneoId)
+                        eliminarPartido(partido.id);
                     }}
                   >
                     🗑️
@@ -199,8 +272,15 @@ const Partidos = () => {
 
               <div className="marcador">
                 <div className="equipo-logo">📷</div>
-                <div className="goles">{partido.golesEquipo1} : {partido.golesEquipo2}</div>
+                <div className="goles">
+                  {partido.golesEquipo1} : {partido.golesEquipo2}
+                </div>
                 <div className="equipo-logo">📷</div>
+              </div>
+
+              
+              <div className="estado">
+                Estado: {partido.estado}
               </div>
 
               <div className="ubicacion editable">

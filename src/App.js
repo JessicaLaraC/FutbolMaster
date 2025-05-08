@@ -36,7 +36,7 @@ import FormularioEstadisticas from "./components/FromularioEstadisticas";
 import FormularioJugadores from "./components/FromularioJugadores"
 import CalificarJugadores from "./components/CalificacionJugadores";
 import FormularioAlineacion from "./components/FormularioAlineación";
-
+import EditarEquipo from "./components/EditarEquipo";
 function App() {
   const [user, setUser] = useState(null);
   const [isAuthChecked, setIsAuthChecked] = useState(false);
@@ -100,6 +100,9 @@ function App() {
               />
               <Route path="/editar-torneo/:torneoId" 
                 element={user ?<EditarTorneo />: <Navigate to="/login" />}
+              />
+              <Route path="/editar-equipos/:torneoId" 
+              element={user ?<EditarEquipo />: <Navigate to="/login"/>} 
               />
               <Route
                 path="/torneos/:id/tabla"

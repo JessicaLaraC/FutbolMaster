@@ -12,7 +12,7 @@ const PanelTorneo = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm] = useState("");
     const [userId, setUserId] = useState(null);
-    const torneosPerPage = 2;
+    const torneosPerPage = 5;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -102,9 +102,11 @@ const PanelTorneo = () => {
         }
     };
 
-    const handleCardClick = (id) => {
-        navigate(`/torneo/${id}`);
+    const handleCardClick = (id, creadorId) => {
+        navigate(`/torneo/${id}?creador=${creadorId}`);
     };
+    
+    
 
     if (loading) return <p>🔄 Cargando torneos...</p>;
 
@@ -114,13 +116,24 @@ const PanelTorneo = () => {
         <button className="btn-crear-torneo" onClick={() => navigate("/nuevo-torneo")}>
                     ➕ Crear Torneo
         </button>
+        <div className="pagination-buttons">
+                <button onClick={prevPage} disabled={currentPage === 1}>
+                ⬅️ Anterior
+                </button>
+                <button
+                onClick={nextPage}
+                disabled={indexOfLastTorneo >= torneosFiltrados.length}
+                >
+                Siguiente ➡️
+                </button>
+        </div>
         <div className="torneos-grid">
             {currentTorneos.length > 0 ? (
             currentTorneos.map((torneo) => (
                 <div
                 key={torneo.id}
                 className="torneo-card-wrapper"
-                onClick={() => handleCardClick(torneo.id)}
+                onClick={() => handleCardClick(torneo.id, torneo.creadorId)}
                 style={{ cursor: "pointer" }}
                 >
                 <TorneoCard
@@ -140,17 +153,7 @@ const PanelTorneo = () => {
             )}
         </div>
 
-        <div className="pagination-buttons">
-            <button onClick={prevPage} disabled={currentPage === 1}>
-            ⬅️ Anterior
-            </button>
-            <button
-            onClick={nextPage}
-            disabled={indexOfLastTorneo >= torneosFiltrados.length}
-            >
-            Siguiente ➡️
-            </button>
-        </div>
+        
         </div>
     );
 };

@@ -2,48 +2,43 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"; 
 import { doc, getDoc, collection, getDocs } from "firebase/firestore"; 
 import { db } from "./firebase";
-import { getAuth } from "firebase/auth";
-
-
 import "../styles/Torneo.css";
-
+import { useLocation } from "react-router-dom";
 function Torneo() {
     const { id } = useParams(); 
     const [torneo, setTorneo] = useState(null);
     const [numEquipos, setNumEquipos] = useState(0); 
     const navigate = useNavigate(); 
-    const auth = getAuth();
-    const user = auth.currentUser;
-
-
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const creadorId = queryParams.get("creador");
     useEffect(() => {
         const fetchTorneo = async () => {
+            if (!creadorId) {
+                console.error("❌ creadorId no está definido en la URL.");
+                return;
+            }
+        
             try {
-                if (!user) {
-                    console.log("⚠️ No hay usuario autenticado");
-                    return;
-                }
-
-                const torneoRef = doc(db, "Users", user.uid, "Torneos", id);
+                const torneoRef = doc(db, "Users", creadorId, "Torneos", id);
                 const torneoSnap = await getDoc(torneoRef);
-
+        
                 if (torneoSnap.exists()) {
-                    setTorneo(torneoSnap.data());
-
-                    const equiposRef = collection(db, "Users", user.uid, "Torneos", id, "Equipos");
-                    const equiposSnap = await getDocs(equiposRef);
-
-                    setNumEquipos(equiposSnap.size); 
+                setTorneo(torneoSnap.data());
+        
+                const equiposRef = collection(db, "Users", creadorId, "Torneos", id, "Equipos");
+                const equiposSnap = await getDocs(equiposRef);
+                setNumEquipos(equiposSnap.size);
                 } else {
-                    console.log("❌ El torneo no existe");
+                console.log("❌ El torneo no existe");
                 }
             } catch (error) {
                 console.error("❌ Error al obtener el torneo:", error);
             }
         };
-
+    
         fetchTorneo();
-    }, [id, user]);
+    }, [id, creadorId]);
 
     return (
         <div className="torneo-container">

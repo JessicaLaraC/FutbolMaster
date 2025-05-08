@@ -9,7 +9,7 @@ const FormularioJugadores = () => {
     const [equipos, setEquipos] = useState([]);
     const [equipoSeleccionado, setEquipoSeleccionado] = useState("");
     const [nombreJugador, setNombreJugador] = useState("");
-    const [numeroJugador, setNumeroJugador] = useState("");
+    const [numeroPlayera , setnumeroPlayera ] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,9 +31,9 @@ const FormularioJugadores = () => {
 
     const handleGuardar = async () => {
         const userId = auth.currentUser?.uid;
-        if (!userId || !equipoSeleccionado || !nombreJugador || !numeroJugador) return;
+        if (!userId || !equipoSeleccionado || !nombreJugador || !numeroPlayera ) return;
 
-        const jugadorId = `${nombreJugador}-${numeroJugador}`.replace(/\s/g, "-").toLowerCase();
+        const jugadorId = `${nombreJugador}-${numeroPlayera }`.replace(/\s/g, "-").toLowerCase();
         const jugadorRef = doc(
         db,
         `Users/${userId}/Torneos/${torneoId}/Equipos/${equipoSeleccionado}/Jugadores/${jugadorId}`
@@ -41,11 +41,11 @@ const FormularioJugadores = () => {
 
         await setDoc(jugadorRef, {
         nombre: nombreJugador,
-        numero: numeroJugador,
+        numero: numeroPlayera ,
         });
 
         setNombreJugador("");
-        setNumeroJugador("");
+        setnumeroPlayera ("");
         setEquipoSeleccionado("");
         alert("Jugador guardado correctamente");
         navigate(-1); 
@@ -77,8 +77,8 @@ const FormularioJugadores = () => {
         <input
             type="number"
             placeholder="Número del jugador"
-            value={numeroJugador}
-            onChange={(e) => setNumeroJugador(e.target.value)}
+            value={numeroPlayera }
+            onChange={(e) => setnumeroPlayera (e.target.value)}
         />
 
         <div className="acciones">

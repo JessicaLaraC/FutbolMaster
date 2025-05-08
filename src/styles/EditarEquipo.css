@@ -1,0 +1,94 @@
+.editar-equipo-form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 16px;
+    background-color: #e0f4e8;
+    border-radius: 8px;
+    font-family: sans-serif;
+    color: #2d6a4f;
+  }
+  .editar-equipo-form h2 {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .equipo-item {
+    border: 1px solid #a8dadc;
+    border-radius: 6px;
+    padding: 8px;
+    margin-bottom: 12px;
+  }
+  .equipo-item input[type="text"],
+  .equipo-item input[type="number"] {
+    width: calc(50% - 8px);
+    margin-right: 8px;
+    margin-bottom: 6px;
+    padding: 4px;
+    border: 1px solid #38a169;
+    border-radius: 4px;
+  }
+  .btn-group {
+    display: inline-flex;
+    margin-left: 8px;
+  }
+  .small-btn {
+    padding: 4px 8px;
+    margin-right: 4px;
+    font-size: 12px;
+    background-color: #38a169;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .small-btn.danger {
+    background-color: #d90429;
+  }
+  .tiny-btn {
+    padding: 2px 6px;
+    font-size: 10px;
+    background-color: #38a169;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 4px;
+  }
+  .tiny-btn.danger {
+    background-color: #d90429;
+  }
+  .jugadores {
+    margin-top: 8px;
+  }
+  .jugador-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .jugador-item input {
+    width: calc(45% - 6px);
+    margin-right: 6px;
+    padding: 4px;
+    border: 1px solid #38a169;
+    border-radius: 4px;
+  }
+  .btn {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2d6a4f;
+    color: #fff;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background-color: #22543d;
+  }
+  .agregar-btn {
+    margin-top: 0;
+  }
+  .volver-btn {
+    margin-top: 4px;
+  }
+  
