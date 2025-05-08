@@ -26,7 +26,7 @@ const EditarEquipo = () => {
                 return {
                 id: j.id,
                 nombre: jugador.nombre || jugador.nombre_jugador || "Jugador sin nombre",
-                numero: jugador.numeroPlayera 
+                numero: jugador.numeroPlayera || jugador.numero_camisa
                 };
             });
             return { id: d.id, nombre: equipoNombre, jugadores };
